@@ -3,8 +3,10 @@ package br.com.ada.gerenciadorFIlmesSeries.controller;
 
 import br.com.ada.gerenciadorFIlmesSeries.domain.Endereco;
 import br.com.ada.gerenciadorFIlmesSeries.domain.Usuario;
+import br.com.ada.gerenciadorFIlmesSeries.dto.EnderecoSaveDTO;
 import br.com.ada.gerenciadorFIlmesSeries.service.EnderecoService;
 import br.com.ada.gerenciadorFIlmesSeries.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +32,21 @@ public class EnderecoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Endereco save(@RequestBody Endereco endereco){
+    public Endereco save(@Valid @RequestBody EnderecoSaveDTO dto){
+        Endereco endereco = Endereco.builder()
+                .cep(dto.getCep())
+                .logradouro(dto.getLogradouro())
+                .numero(dto.getNumero())
+                .build();
         return enderecoService.save(endereco);
     }
     @PutMapping("{id}")
-    public Endereco update(@PathVariable Long id, @RequestBody Endereco endereco){
+    public Endereco update(@PathVariable Long id, @RequestBody EnderecoSaveDTO dto){
+        Endereco endereco = Endereco.builder()
+                .cep(dto.getCep())
+                .logradouro(dto.getLogradouro())
+                .numero(dto.getNumero())
+                .build();
         return enderecoService.update(id, endereco);
     }
 
