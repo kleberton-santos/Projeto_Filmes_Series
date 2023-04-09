@@ -1,42 +1,41 @@
 package br.com.ada.gerenciadorFIlmesSeries.service;
 
 import br.com.ada.gerenciadorFIlmesSeries.domain.Endereco;
+import br.com.ada.gerenciadorFIlmesSeries.domain.Genero;
 import br.com.ada.gerenciadorFIlmesSeries.exception.EnderecoNotFoundException;
 import br.com.ada.gerenciadorFIlmesSeries.repository.EnderecoRepository;
+import br.com.ada.gerenciadorFIlmesSeries.repository.GeneroRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class EnderecoServiceImpl implements EnderecoService{
+public class GeneroServiceImpl implements GeneroService{
+    private final GeneroRepository repository;
+    // private List<Endereco> enderecos = new ArrayList<>();
 
-    private final EnderecoRepository repository;
-   // private List<Endereco> enderecos = new ArrayList<>();
-
-    public List<Endereco> list(){
-        return (List<Endereco>) repository.findAll();
+    public List<Genero> list(){
+        return (List<Genero>) repository.findAll();
     }
 
     @Override
-    public Endereco save(Endereco endereco) {
-        return repository.save(endereco);
+    public Genero save(Genero genero) {
+        return repository.save(genero);
     }
 
     @Override
-    public Endereco findById(Long id) {
+    public Genero findById(Long id) {
         return repository.findById(id).orElseThrow(EnderecoNotFoundException::new);
     }
 
     @Override
-    public Endereco update(Long id, Endereco endereco) {
-       if (repository.existsById(id)){
-           endereco.setId(id);
-           return repository.save(endereco);
-       }
-       throw new EnderecoNotFoundException();
+    public Genero update(Long id, Genero genero) {
+        if (repository.existsById(id)){
+            genero.setId(id);
+            return repository.save(genero);
+        }
+        throw new EnderecoNotFoundException();
     }
 
     @Override

@@ -1,15 +1,11 @@
 package br.com.ada.gerenciadorFIlmesSeries.domain;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,16 +13,20 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Endereco {
+public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     // validação de dados campos nao entram em branco e vazio
     @NotBlank
-    private String cep;
-    private String logradouro;
-    private String numero;
+    private String nome;
+    private String ano;
+
+    @ManyToOne
+    private Genero genero;
+
+    @ManyToMany(mappedBy = "filmes")
+    private Set<ListaFilmes> filmes;
 
 
 }
-

@@ -1,6 +1,9 @@
 package br.com.ada.gerenciadorFIlmesSeries.controller;
 
+import br.com.ada.gerenciadorFIlmesSeries.domain.Endereco;
 import br.com.ada.gerenciadorFIlmesSeries.domain.Usuario;
+import br.com.ada.gerenciadorFIlmesSeries.dto.UsuarioSaveDTO;
+import br.com.ada.gerenciadorFIlmesSeries.mapper.UsuarioMapper;
 import br.com.ada.gerenciadorFIlmesSeries.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final UsuarioMapper mapper;
 
     @GetMapping
     public List<Usuario> list(){
@@ -27,12 +31,22 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario save(@RequestBody Usuario usuario){
+    public Usuario save(@RequestBody UsuarioSaveDTO dto){
+        Usuario usuario = Usuario.builder()
+                .nome(dto.getNome())
+                .cpf(dto.getCpf())
+                .endereco(dto.getEndereco())
+                .build();
         return usuarioService.save(usuario);
     }
     @PutMapping("{id}")
-    public Usuario update(@PathVariable Long id, @RequestBody Usuario aerogerador){
-        return usuarioService.update(id, aerogerador);
+    public Usuario update(@PathVariable Long id, @RequestBody UsuarioSaveDTO dto){
+        Usuario usuario = Usuario.builder()
+                .nome(dto.getNome())
+                .cpf(dto.getCpf())
+                .endereco(dto.getEndereco())
+                .build();
+        return usuarioService.save(usuario);
     }
 
     @DeleteMapping("{id}")

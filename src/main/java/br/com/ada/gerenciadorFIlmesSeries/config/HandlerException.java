@@ -1,5 +1,8 @@
 package br.com.ada.gerenciadorFIlmesSeries.config;
 
+import br.com.ada.gerenciadorFIlmesSeries.dto.ErrorDTO;
+import br.com.ada.gerenciadorFIlmesSeries.exception.EnderecoNotFoundException;
+import br.com.ada.gerenciadorFIlmesSeries.exception.UsuarioNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,4 +28,16 @@ public class HandlerException {
         });
         return errors;
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EnderecoNotFoundException.class)
+    public ErrorDTO handlerEnderecoNotFound(EnderecoNotFoundException ex){
+        return ErrorDTO.builder().message(ex.getMessage()).build();
+    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UsuarioNotFoundException.class)
+    public ErrorDTO handlerUsuarioNotFound(UsuarioNotFoundException ex){
+        return ErrorDTO.builder().message(ex.getMessage()).build();
+    }
+
 }
