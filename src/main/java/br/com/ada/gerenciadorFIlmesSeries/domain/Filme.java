@@ -25,8 +25,8 @@ public class Filme {
     @ManyToOne
     private Genero genero;
 
-    @ManyToMany(mappedBy = "filmes")
-    private Set<ListaFilmes> filmes;
+    @ManyToMany(mappedBy = "listafilmes")
+    private Set<Filme> filmes;
 
 
 }

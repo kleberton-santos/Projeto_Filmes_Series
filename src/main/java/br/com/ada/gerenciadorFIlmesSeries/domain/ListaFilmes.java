@@ -21,12 +21,14 @@ public class ListaFilmes {
     private String nome;
     private ListaFilmes lista;
 
+
+
     @ManyToMany
     @JoinTable(
-            name = "lista_filmes",
-            joinColumns = @JoinColumn(name = "filmes_id"),
-            inverseJoinColumns = @JoinColumn(name = "filmes_id")
+            name = "listafilmes",
+            joinColumns = @JoinColumn(name = "listafilmes_id"),
+            inverseJoinColumns = @JoinColumn(name = "listafilmes_id")
     )
-    @JsonIgnoreProperties("filmes")
-    private Set<Filme> filmes;
+    @JsonIgnoreProperties("listafilmes")
+    private Set<ListaFilmes> listaFilmes;
 }
